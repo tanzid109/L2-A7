@@ -1,5 +1,4 @@
 import LoginForm from "@/components/form/login-form";
-import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,6 +23,7 @@ export default function LoginPage() {
           width={500}
           src="/assets/login.jpg"
           alt="Image"
+          loading="eager"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
