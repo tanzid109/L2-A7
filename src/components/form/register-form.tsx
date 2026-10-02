@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
 import { useRegistration } from "@/hooks";
 import { toast } from "../ui/toast";
-import z from "zod";
+import type z from "zod";
 import { patientRegistrationSchema } from "@/validation";
 import { Spinner } from "../ui/spinner";
 
