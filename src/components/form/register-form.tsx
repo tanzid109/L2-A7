@@ -29,9 +29,9 @@ export function RegisterForm() {
   type PatientDefaultValues = z.infer<typeof patientRegistrationSchema>;
 
   const defaultValues: PatientDefaultValues = {
-    name: "Mir",
-    email: "mir@gmail.com",
-    contactNumber: "0191234567",
+    name: "",
+    email: "",
+    phone: "01912345678",
     password: "@User123456",
     confirmPassword: "@User123456",
   };
@@ -48,7 +48,7 @@ export function RegisterForm() {
         name: value.name,
         email: value.email,
         password: value.password,
-        contactNumber: value.contactNumber,
+        phone: value.phone,
       };
 
       registration(registrationData, {
@@ -71,9 +71,11 @@ export function RegisterForm() {
         },
         onError: (err) => {
           toast.add({
-            title: "Authorization failure",
+            title: "Verification failure",
             description:
-              err.message || "Something went wrong. Please try again",
+              (err as Error & { data?: { message?: string } }).data?.message ||
+              err.message ||
+              "Something went wrong. Please try again",
             type: "error",
           });
         },
@@ -150,7 +152,7 @@ export function RegisterForm() {
             }}
           </form.Field>
 
-          <form.Field name="contactNumber">
+          <form.Field name="phone">
             {(field) => {
               const isInvalid =
                 field.state.meta.isTouched && !field.state.meta.isValid;

@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useVerifyAccount } from "@/hooks";
 import { toast } from "../ui/toast";
+import { Spinner } from "../ui/spinner";
 
 const RESEND_COOLDOWN = 120;
 
@@ -80,7 +81,10 @@ export default function VerifyAccountForm() {
       onError: (err) => {
         toast.add({
           title: "Verification failure",
-          description: err.message || "Something went wrong. Please try again",
+          description:
+            (err as Error & { data?: { message?: string } }).data?.message ||
+            err.message ||
+            "Something went wrong. Please try again",
           type: "error",
         });
       },
@@ -145,7 +149,7 @@ export default function VerifyAccountForm() {
       <CardFooter>
         {/* <Button disabled={resendTimer > 0}>Resend</Button> */}
         <Button disabled={verifyPending} type="submit" form="otp-form">
-          Submit
+          {verifyPending ? (<><Spinner /> Submitting</>) : (<>Submit</>)}
         </Button>
       </CardFooter>
     </Card>

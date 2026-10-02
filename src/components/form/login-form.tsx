@@ -13,7 +13,7 @@ import {
 import { loginSchema } from "@/validation";
 import { useState } from "react";
 import { Eye, EyeClosed } from "lucide-react";
-import {  useLogin } from "@/hooks";
+import { useLogin } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { toast } from "../ui/toast";
 import { Spinner } from "../ui/spinner";
@@ -51,9 +51,11 @@ export default function LoginForm() {
         },
         onError: (err) => {
           toast.add({
-            title: "Authorization failure",
+            title: "Verification failure",
             description:
-              err.message || "Something went wrong. Please try again",
+              (err as Error & { data?: { message?: string } }).data?.message ||
+              err.message ||
+              "Something went wrong. Please try again",
             type: "error",
           });
         },
@@ -109,7 +111,15 @@ export default function LoginForm() {
 
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                  <div className="flex items-center justify-between">
+                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                    <Link
+                      href="/forgot-password"
+                      className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
                   <div className="relative">
                     <Input
                       id={field.name}
