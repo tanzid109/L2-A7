@@ -28,8 +28,8 @@ export default function LoginForm() {
 
   const form = useForm({
     defaultValues: {
-      email: "tanzid.unkhalil380@gmail.com",
-      password: "@User123456",
+      email: "admin@fieldops.com",
+      password: "Password123@",
     },
     validators: {
       onSubmit: loginSchema,
