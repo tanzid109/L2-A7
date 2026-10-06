@@ -23,6 +23,12 @@ export function getAllServices(params: ServiceParams = {}) {
   });
 }
 
+export function updateService(id: string, payload: FormData) {
+  return apiClient<ApiResponse<null>>(`/services/${id}`, {
+    method: "PATCH",
+    body: payload,
+  });
+}
 export function deleteService(id: string) {
   return apiClient<ApiResponse<null>>(`/services/${id}`, {
     method: "DELETE",

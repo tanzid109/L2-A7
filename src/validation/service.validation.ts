@@ -45,3 +45,17 @@ export const serviceSchema = z.object({
       `Max ${MAX_FILE_SIZE} MB`,
     ),
 });
+
+export const serviceUpdateSchema = serviceSchema.omit({ image: true }).extend({
+  image: z
+    .instanceof(File)
+    .nullable()
+    .refine(
+      (f) => !f || SERVICE_IMAGE_TYPES.includes(f.type),
+      "Unsupported image type",
+    )
+    .refine(
+      (f) => !f || f.size <= MAX_FILE_SIZE * 1024 * 1024,
+      `Max ${MAX_FILE_SIZE} MB`,
+    ),
+});

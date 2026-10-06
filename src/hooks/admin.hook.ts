@@ -1,5 +1,11 @@
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { createService, deleteService, getAdminAnalytics, getAllServices } from "@/api";
+import {
+  createService,
+  deleteService,
+  getAdminAnalytics,
+  getAllServices,
+  updateService,
+} from "@/api";
 import { ServiceParams } from "@/types/service.type";
 
 export function useSuspenseGetAdminAnalytics() {
@@ -27,6 +33,17 @@ export function useDeleteService() {
 
   return useMutation({
     mutationFn: deleteService,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["services"] });
+    },
+  });
+}
+export function useUpdateService() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, payload }: { id: string; payload: FormData }) =>
+      updateService(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["services"] });
     },

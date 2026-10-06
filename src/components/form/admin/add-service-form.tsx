@@ -16,13 +16,15 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toast";
-import { useCreateService } from "@/hooks";
+import { useCreateService, useUpdateService } from "@/hooks";
+import type { Service } from "@/types/admin.type";
 import { formatFileSize, slugify } from "@/utils";
 import {
   MAX_FILE_SIZE,
   MAX_SERVICE_DESCRIPTION_LENGTH,
   SERVICE_IMAGE_TYPES,
   serviceSchema,
+  serviceUpdateSchema,
 } from "@/validation";
 
 type ServiceValues = z.input<typeof serviceSchema>;
@@ -37,18 +39,43 @@ const defaultValues: ServiceValues = {
   image: null,
 };
 
-export default function AddServiceForm() {
-  const { mutate: create, isPending } = useCreateService();
+function getServiceDefaultValues(service: Service): ServiceValues {
+  return {
+    title: service.title,
+    slug: service.slug,
+    description: service.description,
+    category: service.category,
+    price: service.price,
+    duration: String(service.duration),
+    image: null,
+  };
+}
+
+interface Props {
+  service?: Service;
+  embedded?: boolean;
+  onSaved?: () => void;
+}
+
+export default function AddServiceForm({
+  service,
+  embedded = false,
+  onSaved,
+}: Props) {
+  const isUpdate = Boolean(service);
+  const { mutate: create, isPending: creating } = useCreateService();
+  const { mutate: update, isPending: updating } = useUpdateService();
+  const isPending = creating || updating;
   const imageInputRef = useRef<HTMLInputElement>(null);
   const [slugEdited, setSlugEdited] = useState(false);
 
   const form = useForm({
-    defaultValues,
+    defaultValues: service ? getServiceDefaultValues(service) : defaultValues,
     validators: {
-      onSubmit: serviceSchema,
+      onSubmit: isUpdate ? serviceUpdateSchema : serviceSchema,
     },
     onSubmit: async ({ value }) => {
-      if (!value.image) return;
+      if (!isUpdate && !value.image) return;
 
       const formData = new FormData();
       formData.append("title", value.title.trim());
@@ -57,7 +84,45 @@ export default function AddServiceForm() {
       formData.append("category", value.category.trim());
       formData.append("price", value.price.trim());
       formData.append("duration", value.duration.trim());
-      formData.append("image", value.image);
+      if (value.image) {
+        formData.append("image", value.image);
+      }
+
+      if (service) {
+        update(
+          { id: service.id, payload: formData },
+          {
+            onSuccess: (res) => {
+              if (!res.success) {
+                toast.add({
+                  title: "Server Failure",
+                  description: "Something went wrong. Please try again",
+                  type: "error",
+                });
+                return;
+              }
+              toast.add({
+                title: "Service updated",
+                description: res.message,
+                type: "success",
+              });
+              onSaved?.();
+            },
+            onError: (err) => {
+              toast.add({
+                title: "Failed to update service",
+                description:
+                  (err as Error & { data?: { message?: string } }).data
+                    ?.message ||
+                  err.message ||
+                  "Something went wrong. Please try again",
+                type: "error",
+              });
+            },
+          },
+        );
+        return;
+      }
 
       create(formData, {
         onSuccess: (res) => {
@@ -93,7 +158,9 @@ export default function AddServiceForm() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-bold tracking-tight">Add Service</h1>
+      {!embedded && (
+        <h1 className="text-2xl font-bold tracking-tight">Add Service</h1>
+      )}
 
       <form
         onSubmit={(e) => {
@@ -337,7 +404,9 @@ export default function AddServiceForm() {
                       </span>
                     ) : (
                       <span className="text-xs text-muted-foreground">
-                        JPG, PNG, WEBP or AVIF up to {MAX_FILE_SIZE} MB
+                        {isUpdate
+                          ? "No change, current image will be kept"
+                          : `JPG, PNG, WEBP or AVIF up to ${MAX_FILE_SIZE} MB`}
                       </span>
                     )}
                   </div>
@@ -352,8 +421,10 @@ export default function AddServiceForm() {
           <Button disabled={isPending} type="submit">
             {isPending ? (
               <>
-                <Spinner /> Creating
+                <Spinner /> {isUpdate ? "Saving" : "Creating"}
               </>
+            ) : isUpdate ? (
+              "Update Service"
             ) : (
               "Create Service"
             )}

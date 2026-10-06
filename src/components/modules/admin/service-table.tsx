@@ -1,8 +1,17 @@
 "use client";
 
 import { Pencil, Trash2 } from "lucide-react";
+import { useState } from "react";
+import AddServiceForm from "@/components/form/admin/add-service-form";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+} from "@/components/ui/sheet";
 import { Spinner } from "@/components/ui/spinner";
 import {
     Table,
@@ -13,13 +22,12 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { toast } from "@/components/ui/toast";
-import {  useDeleteService, useGetAllServices } from "@/hooks";
+import { useDeleteService, useGetAllServices } from "@/hooks";
+import type { Service } from "@/types/admin.type";
 import { ServiceParams } from "@/types/service.type";
 import ServiceTableLoading from "./service-table-loading";
 
-interface Props extends ServiceParams {
-    // handleUpdate: (id: string) => void;
-}
+interface Props extends ServiceParams {}
 
 function getErrorMessage(error: unknown) {
     return (
@@ -30,6 +38,7 @@ function getErrorMessage(error: unknown) {
 }
 
 export default function ServiceTable({ ...params }: Props) {
+    const [updating, setUpdating] = useState<Service | null>(null);
     const { data, isPending, isError, error, refetch, isFetching } =
         useGetAllServices(params);
     const {
@@ -140,7 +149,7 @@ export default function ServiceTable({ ...params }: Props) {
                                     <Button
                                         variant="outline"
                                         size="sm"
-                                        // onClick={() => handleUpdate(service.id)}
+                                        onClick={() => setUpdating(service)}
                                     >
                                         <Pencil className="size-4" />
                                         Update
@@ -164,6 +173,33 @@ export default function ServiceTable({ ...params }: Props) {
                     ))}
                 </TableBody>
             </Table>
+
+            <Sheet
+                open={!!updating}
+                onOpenChange={(open) => !open && setUpdating(null)}
+            >
+                <SheetContent
+                    side="right"
+                    className="overflow-y-auto sm:max-w-lg"
+                >
+                    <SheetHeader>
+                        <SheetTitle>Update service</SheetTitle>
+                        <SheetDescription>
+                            Edit the service details and save changes.
+                        </SheetDescription>
+                    </SheetHeader>
+                    {updating && (
+                        <div className="px-8 pb-8">
+                            <AddServiceForm
+                                key={updating.id}
+                                service={updating}
+                                embedded
+                                onSaved={() => setUpdating(null)}
+                            />
+                        </div>
+                    )}
+                </SheetContent>
+            </Sheet>
         </div>
     );
 }
