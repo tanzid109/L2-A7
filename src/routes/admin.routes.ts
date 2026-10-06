@@ -16,6 +16,10 @@ export const adminRoutes = [
         title: "Add Service",
         url: `${prefix}/add-service`,
       },
+      {
+        title: "All Services",
+        url: `${prefix}/all-services`,
+      },
     ],
   },
   {
