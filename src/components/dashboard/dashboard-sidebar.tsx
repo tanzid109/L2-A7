@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Sidebar,
   SidebarContent,
@@ -12,11 +14,8 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { UserRole } from "@/types";
 import { adminRoutes, customerRoutes, technicianRoutes } from "@/routes";
-import { SidebarItems } from "@/types";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import type { SidebarItems, UserRole } from "@/types";
 
 const sidebarRoutes: Partial<Record<UserRole, SidebarItems>> = {
   ADMIN: adminRoutes,
@@ -28,7 +27,11 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
   const routes: SidebarItems = sidebarRoutes[role] || [];
 
-  console.log(pathname);
+  const activeUrl = routes
+    .flatMap((group) => group.items)
+    .map((item) => item.url)
+    .filter((url) => pathname === url || pathname.startsWith(`${url}/`))
+    .sort((a, b) => b.length - a.length)[0];
 
   return (
     <Sidebar>
@@ -49,7 +52,7 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
                       render={<Link href={item.url} />}
-                      isActive={pathname === item.url}
+                      isActive={item.url === activeUrl}
                     >
                       {item.title}
                     </SidebarMenuButton>

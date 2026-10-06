@@ -2,15 +2,23 @@ const prefix = "/technician";
 
 export const technicianRoutes = [
   {
-    title: "Schedule",
+    title: "Bookings",
     items: [
       {
         title: "Overview",
         url: `${prefix}`,
       },
       {
-        title: "Create Schedule",
-        url: `${prefix}`,
+        title: "My Bookings",
+        url: `${prefix}/bookings`,
+      },
+      {
+        title: "Availability",
+        url: `${prefix}/availability`,
+      },
+      {
+        title: "Reviews",
+        url: `${prefix}/reviews`,
       },
     ],
   },

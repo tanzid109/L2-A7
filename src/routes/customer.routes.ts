@@ -9,8 +9,12 @@ export const customerRoutes = [
         url: `${prefix}`,
       },
       {
+        title: "My Bookings",
+        url: `${prefix}/bookings`,
+      },
+      {
         title: "Payment History",
-        url: `${prefix}`,
+        url: `${prefix}/payments`,
       },
     ],
   },
@@ -24,7 +28,7 @@ export const customerRoutes = [
       {
         title: "Profile Update",
         url: `${prefix}/profile-update`,
-      }
+      },
     ],
   },
 ];

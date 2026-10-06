@@ -1,7 +1,5 @@
-export default function page() {
-  return (
-    <div>
-      <h1> This is page component </h1>
-    </div>
-  );
+import CustomerOverview from "@/components/modules/customer/customer-overview";
+
+export default function CustomerOverviewPage() {
+  return <CustomerOverview />;
 }

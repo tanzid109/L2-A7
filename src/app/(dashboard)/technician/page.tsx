@@ -1,7 +1,5 @@
-export default function page() {
-  return (
-    <div>
-      <h1> This is page component </h1>
-    </div>
-  );
+import TechnicianOverview from "@/components/modules/technician/technician-overview";
+
+export default function TechnicianDashboardPage() {
+  return <TechnicianOverview />;
 }

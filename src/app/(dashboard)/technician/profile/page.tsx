@@ -1,11 +1,5 @@
-import Profile from "@/components/shared/profile";
+import TechnicianProfile from "@/components/modules/technician/technician-profile";
 
-const TechnicianProfilePage = () => {
-  return (
-    <div>
-      <Profile />;
-    </div>
-  );
-};
-
-export default TechnicianProfilePage;
+export default function TechnicianProfilePage() {
+  return <TechnicianProfile />;
+}

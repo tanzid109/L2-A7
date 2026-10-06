@@ -1,12 +1,12 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { useGetMe, useLogout } from "@/hooks";
 import type { UserRole } from "@/types";
-import { useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export default function Header() {
   const routes = [
@@ -23,10 +23,10 @@ export default function Header() {
   const { data, isLoading } = useGetMe();
   const { mutate: logout } = useLogout();
   const queryClient = useQueryClient();
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const role = data?.data?.role;
-
+  const bookUrl = role === "CUSTOMER" ? "/customer/book" : "/services";
 
   const handleLogout = () => {
     logout(undefined, {
@@ -58,18 +58,34 @@ export default function Header() {
 
         <nav className="flex gap-5">
           {routes.map((route) => (
-            <Link key={route.url} href={route.url} className={pathname === route.url ? "font-semibold" : ""}>
+            <Link
+              key={route.url}
+              href={route.url}
+              className={pathname === route.url ? "font-semibold" : ""}
+            >
               {route.name}
             </Link>
           ))}
           {role && (
-            <Link href={dashboardRoute[role]} className={pathname === dashboardRoute[role] ? "font-semibold" : ""}>
+            <Link
+              href={dashboardRoute[role]}
+              className={
+                pathname === dashboardRoute[role] ? "font-semibold" : ""
+              }
+            >
               Dashboard
             </Link>
           )}
         </nav>
 
-        <div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            render={<Link href={bookUrl} />}
+            nativeButton={false}
+          >
+            Book now
+          </Button>
           {!isLoading && !data && (
             <Button
               variant="outline"
