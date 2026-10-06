@@ -14,3 +14,21 @@ export interface AdminAnalytics {
 }
 
 export type GetAdminAnalyticsResponse = ApiResponse<AdminAnalytics>;
+
+export interface Service {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  price: string;
+  duration: number; // minutes
+  imageUrl: string;
+  imagePublicId: string;
+  isActive: boolean;
+  createdById: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type CreateServiceResponse = ApiResponse<Service>;

@@ -1,7 +1,6 @@
-
-import TechnicianApplyForm from "@/components/form/technician-apply-form";
 import Image from "next/image";
 import Link from "next/link";
+import TechnicianApplyForm from "@/components/form/technician/technician-apply-form";
 
 export default function ApplyPage() {
   return (

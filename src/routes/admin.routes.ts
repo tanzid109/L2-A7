@@ -12,10 +12,14 @@ export const adminRoutes = [
         title: "Technician Approval",
         url: `${prefix}/approve-technician`,
       },
+      {
+        title: "Add Service",
+        url: `${prefix}/add-service`,
+      },
     ],
   },
   {
-    title: "App Settings",
+    title: "Profile Settings",
     items: [
       {
         title: "Routing",

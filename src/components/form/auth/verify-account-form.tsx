@@ -1,6 +1,10 @@
 "use client";
 
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useVerifyAccount } from "@/hooks";
+import { Button } from "../../ui/button";
 import {
   Card,
   CardContent,
@@ -8,15 +12,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Button } from "../ui/button";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
-import { Field, FieldDescription, FieldError, FieldLabel } from "../ui/field";
-import { useEffect, useState } from "react";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useVerifyAccount } from "@/hooks";
-import { toast } from "../ui/toast";
-import { Spinner } from "../ui/spinner";
+} from "../../ui/card";
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "../../ui/field";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../../ui/input-otp";
+import { Spinner } from "../../ui/spinner";
+import { toast } from "../../ui/toast";
 
 const RESEND_COOLDOWN = 120;
 
@@ -149,7 +154,13 @@ export default function VerifyAccountForm() {
       <CardFooter>
         {/* <Button disabled={resendTimer > 0}>Resend</Button> */}
         <Button disabled={verifyPending} type="submit" form="otp-form">
-          {verifyPending ? (<><Spinner /> Submitting</>) : (<>Submit</>)}
+          {verifyPending ? (
+            <>
+              <Spinner /> Submitting
+            </>
+          ) : (
+            <>Submit</>
+          )}
         </Button>
       </CardFooter>
     </Card>

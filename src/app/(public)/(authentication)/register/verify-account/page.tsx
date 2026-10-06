@@ -1,4 +1,4 @@
-import VerifyAccountForm from "@/components/form/verify-account-form";
+import VerifyAccountForm from "@/components/form/auth/verify-account-form";
 import Image from "next/image";
 
 import Link from "next/link";

@@ -10,7 +10,6 @@ import {
   Stethoscope,
   X,
 } from "lucide-react";
-import Link from "next/link";
 import { useRef } from "react";
 import type z from "zod";
 // import { useRouter } from "next/navigation";
@@ -23,7 +22,9 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/toast";
 import { useTechnicianApply } from "@/hooks";
 import { formatFileSize } from "@/utils";
 import {
@@ -33,8 +34,6 @@ import {
   MAX_FILE_SIZE,
   technicianApplicationSchema,
 } from "@/validation";
-import { toast } from "../ui/toast";
-import { Spinner } from "../ui/spinner";
 
 export default function TechnicianApplyForm() {
   // const router = useRouter();
@@ -88,7 +87,7 @@ export default function TechnicianApplyForm() {
             description: "Soon you will get email",
             type: "success",
           });
-          form.reset()
+          form.reset();
         },
         onError: (err) => {
           toast.add({

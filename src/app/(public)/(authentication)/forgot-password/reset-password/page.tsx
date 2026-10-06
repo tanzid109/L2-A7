@@ -1,4 +1,4 @@
-import ResetPasswordForm from "@/components/form/reset-password-form";
+import ResetPasswordForm from "@/components/form/auth/reset-password-form";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
