@@ -6,10 +6,12 @@ import { useGetMe, useLogout } from "@/hooks";
 import type { UserRole } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const routes = [
     { name: "Home", url: "/" },
+    { name: "Services", url: "/services" },
     { name: "About us", url: "/about-us" },
   ];
 
@@ -21,6 +23,7 @@ export default function Header() {
   const { data, isLoading } = useGetMe();
   const { mutate: logout } = useLogout();
   const queryClient = useQueryClient();
+  const pathname = usePathname()
 
   const role = data?.data?.role;
 
@@ -55,12 +58,16 @@ export default function Header() {
 
         <nav className="flex gap-5">
           {routes.map((route) => (
-            <Link key={route.url} href={route.url}>
+            <Link key={route.url} href={route.url} className={pathname === route.url ? "font-semibold" : ""}>
               {route.name}
             </Link>
           ))}
+          {role && (
+            <Link href={dashboardRoute[role]} className={pathname === dashboardRoute[role] ? "font-semibold" : ""}>
+              Dashboard
+            </Link>
+          )}
         </nav>
-        {role && <Link href={dashboardRoute[role]}>Dashboard</Link>}
 
         <div>
           {!isLoading && !data && (
