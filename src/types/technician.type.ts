@@ -49,7 +49,7 @@ export type GetAllApplicationsResponse = PaginatedApiResponse<Application>;
 
 export interface ApplicationParams {
   page?: number;
-  limit?:number;
+  limit?: number;
   status?: ApplicationStatus;
 }
 

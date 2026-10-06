@@ -23,7 +23,7 @@ export default function TechnicianApprovalTabs() {
 
   const queryParams: ApplicationParams = {
     page: 1,
-    limit:10,
+    limit: 10,
     ...(tab === "ALL" ? {} : { status: tab }),
   };
 

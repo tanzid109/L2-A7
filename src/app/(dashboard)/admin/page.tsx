@@ -1,7 +1,13 @@
-export default function AdminDashboard() {
+import AdminOverview from "@/components/modules/admin/admin-overview";
+import AdminOverviewLoading from "@/components/modules/admin/admin-overview-loading";
+import { Suspense } from "react";
+
+const AdminDashboard = () => {
   return (
-    <div>
-      <h1> This is admin dashboard </h1>
-    </div>
+    <Suspense fallback={<AdminOverviewLoading />}>
+      <AdminOverview />
+    </Suspense>
   );
-}
+};
+
+export default AdminDashboard;
