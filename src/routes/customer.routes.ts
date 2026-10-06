@@ -22,14 +22,9 @@ export const customerRoutes = [
         url: `${prefix}/profile`,
       },
       {
-        title: "Routing",
-        url: "#",
-      },
-      {
-        title: "Data Fetching",
-        url: "#",
-        isActive: true,
-      },
+        title: "Profile Update",
+        url: `${prefix}/profile-update`,
+      }
     ],
   },
 ];

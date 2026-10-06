@@ -21,3 +21,5 @@ export interface User {
 }
 
 export type GetMeResponse = ApiResponse<User>;
+
+export type UpdateProfileResponse = ApiResponse<User>;

@@ -15,20 +15,15 @@ export const technicianRoutes = [
     ],
   },
   {
-    title: "App Settings",
+    title: "Profile Settings",
     items: [
       {
         title: "Profile",
         url: `${prefix}/profile`,
       },
       {
-        title: "Routing",
-        url: "#",
-      },
-      {
-        title: "Data Fetching",
-        url: "#",
-        isActive: true,
+        title: "Profile Update",
+        url: `${prefix}/profile-update`,
       },
     ],
   },

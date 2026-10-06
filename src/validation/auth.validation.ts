@@ -1,4 +1,5 @@
 import z from "zod";
+import { MAX_FILE_SIZE } from "./technician-application.validation";
 
 export const loginSchema = z.object({
   email: z.email(),
@@ -61,13 +62,30 @@ export const resetPasswordSchema = z.object({
   otp: z.string().regex(/^[0-9]{6}$/, "Otp must be exactly 6 digits long"),
 });
 
-//* GP - 017, 013
-//* BL - 019, 014
-//* Airtel - 016
-//* Robi - 018
-//* TeleTalk - 01512345678
-//! City Cell - 011 (Already dead)
-//! there is no 012
-//todo we need to confirm from [3-9]
+export const AVATAR_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/avif",
+];
 
-//? Either +880, 880, 0
+export const profileUpdateSchema = z.object({
+  name: z.string().trim().min(2, "Name is too short").max(50).optional(),
+  phone: z
+    .string()
+    .refine((val) => val === "" || /^(?:\+?880|0)1[3-9]\d{8}$/.test(val), {
+      message: "Please provide valid Bangladeshi number",
+    })
+    .optional(),
+  avatar: z
+    .instanceof(File)
+    .nullable()
+    .refine(
+      (f) => !f || AVATAR_TYPES.includes(f.type),
+      "Unsupported image type",
+    )
+    .refine(
+      (f) => !f || f.size <= MAX_FILE_SIZE * 1024 * 1024,
+      `Max ${MAX_FILE_SIZE} MB`,
+    ).optional(),
+});

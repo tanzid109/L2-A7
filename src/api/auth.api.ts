@@ -1,5 +1,6 @@
 import apiClient from "@/lib/apiClient";
 import type {
+  ApiResponse,
   GetMeResponse,
   RegistrationPayload,
   ResetPasswordPayload,
@@ -31,6 +32,13 @@ export function userLogout() {
 
 export function getMe() {
   return apiClient<GetMeResponse>("/auth/me");
+}
+
+export function updateProfile(payload: FormData) {
+  return apiClient<ApiResponse<null>>(`/auth/profile`, {
+    method: "PATCH",
+    body: payload,
+  });
 }
 
 export function googleOAuth(payload: { idToken: string }) {
