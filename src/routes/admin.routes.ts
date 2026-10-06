@@ -26,12 +26,12 @@ export const adminRoutes = [
     title: "Profile Settings",
     items: [
       {
-        title: "Routing",
-        url: "#",
+        title: "Profile",
+        url: `${prefix}/profile`,
       },
       {
-        title: "Data Fetching",
-        url: "#",
+        title: "Profile Update",
+        url: `${prefix}/profile-update`,
       },
     ],
   },

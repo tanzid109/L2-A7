@@ -18,6 +18,10 @@ export const customerRoutes = [
     title: "App Settings",
     items: [
       {
+        title: "Profile",
+        url: `${prefix}/profile`,
+      },
+      {
         title: "Routing",
         url: "#",
       },

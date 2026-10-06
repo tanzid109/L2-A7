@@ -22,7 +22,7 @@ export default function Header() {
   const { mutate: logout } = useLogout();
   const queryClient = useQueryClient();
 
-  const role: UserRole = !!data?.data && data?.data.role;
+  const role = data?.data?.role;
 
 
   const handleLogout = () => {
