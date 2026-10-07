@@ -87,5 +87,6 @@ export const profileUpdateSchema = z.object({
     .refine(
       (f) => !f || f.size <= MAX_FILE_SIZE * 1024 * 1024,
       `Max ${MAX_FILE_SIZE} MB`,
-    ).optional(),
+    )
+    .optional(),
 });

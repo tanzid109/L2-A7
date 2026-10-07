@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
-const API_PROXY_TARGET =
-  process.env.API_PROXY_TARGET
+const API_PROXY_TARGET = process.env.API_PROXY_TARGET;
 
 const nextConfig: NextConfig = {
   /* config options here */

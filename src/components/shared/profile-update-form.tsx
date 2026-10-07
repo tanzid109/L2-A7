@@ -62,29 +62,30 @@ export default function ProfileUpdateForm({ user, onSaved }: Props) {
     avatar: null,
   };
   const { data } = useGetMe();
-  
-    if (!data) return <ProfileLoading />;
+
+  if (!data) return <ProfileLoading />;
 
   const form = useForm({
     defaultValues,
     validators: { onSubmit: profileUpdateSchema },
     onSubmit: async ({ value }) => {
-        const formData = new FormData();
-        const name = value.name?.trim();
-        const phone = value.phone?.trim();
+      const formData = new FormData();
+      const name = value.name?.trim();
+      const phone = value.phone?.trim();
 
-        if (name && name !== user.name) formData.append("name", name);
-        if (phone && phone !== (user.phone ?? "")) formData.append("phone", phone);
-        if (value.avatar) formData.append("avatar", value.avatar);
+      if (name && name !== user.name) formData.append("name", name);
+      if (phone && phone !== (user.phone ?? ""))
+        formData.append("phone", phone);
+      if (value.avatar) formData.append("avatar", value.avatar);
 
-        if ([...formData.keys()].length === 0) {
-            toast.add({
-                title: "Nothing to update",
-                description: "Change at least one field",
-                type: "info",
-            });
-            return;
-        }
+      if ([...formData.keys()].length === 0) {
+        toast.add({
+          title: "Nothing to update",
+          description: "Change at least one field",
+          type: "info",
+        });
+        return;
+      }
 
       update(formData, {
         onSuccess: (res) => {

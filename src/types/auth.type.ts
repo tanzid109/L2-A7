@@ -15,6 +15,3 @@ export interface ResetPasswordPayload {
   otp: string;
   newPassword: string;
 }
-
-
-
