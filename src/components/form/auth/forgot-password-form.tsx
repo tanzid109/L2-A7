@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "@tanstack/react-form";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForgot } from "@/hooks";
 import { forgotPasswordSchema } from "@/validation";
@@ -53,10 +54,11 @@ export default function ForgotPasswordForm() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
-          Login to your account
+          Forgot your password?
         </h1>
         <p className="text-balance text-sm text-muted-foreground">
-          Enter your email below to login to your account
+          Enter your email address and we will send you a one-time code to reset
+          your password
         </p>
       </div>
 
@@ -92,14 +94,24 @@ export default function ForgotPasswordForm() {
           <Button disabled={forgetPending} type="submit">
             {forgetPending ? (
               <>
-                <Spinner /> submitting
+                <Spinner /> Sending
               </>
             ) : (
-              "Submit"
+              "Send Reset Code"
             )}
           </Button>
         </FieldGroup>
       </form>
+
+      <div className="text-center text-sm text-muted-foreground">
+        Remembered your password?{" "}
+        <Link
+          href="/login"
+          className="font-medium underline underline-offset-4 hover:text-primary"
+        >
+          Back to login
+        </Link>
+      </div>
     </div>
   );
 }

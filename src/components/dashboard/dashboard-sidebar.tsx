@@ -77,16 +77,16 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="border-b">
+      <SidebarHeader className="border-b border-sidebar-border">
         <Link href="/" className="flex h-10 items-center gap-2 px-2">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
             <Wrench className="size-4" />
           </span>
           <span className="flex flex-col leading-tight group-data-[collapsible=icon]:hidden">
             <span className="font-heading text-base font-bold tracking-tight">
               FieldOps
             </span>
-            <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+            <span className="text-[10px] font-medium uppercase tracking-widest text-sidebar-foreground/60">
               Service Portal
             </span>
           </span>
@@ -108,7 +108,7 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
                         tooltip={item.title}
                         isActive={item.url === activeUrl}
                         className={cn(
-                          "data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary/90",
+                          "data-active:bg-sidebar-primary data-active:text-sidebar-primary-foreground data-active:hover:bg-sidebar-primary/90",
                         )}
                       >
                         {Icon && <Icon />}
@@ -146,7 +146,7 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
                 <span className="truncate text-sm font-medium">
                   {user.name}
                 </span>
-                <span className="truncate text-xs text-muted-foreground">
+                <span className="truncate text-xs text-sidebar-foreground/60">
                   {roleLabel[user.role]}
                 </span>
               </div>
@@ -154,7 +154,7 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
                 variant="ghost"
                 size="icon-sm"
                 onClick={handleLogout}
-                className="ml-auto size-8 text-muted-foreground hover:text-foreground group-data-[collapsible=icon]:hidden"
+                className="ml-auto size-8 text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground group-data-[collapsible=icon]:hidden"
                 title="Logout"
               >
                 <LogOut />
@@ -162,7 +162,7 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
               </Button>
             </>
           ) : (
-            <span className="text-xs text-muted-foreground group-data-[collapsible=icon]:hidden">
+            <span className="text-xs text-sidebar-foreground/60 group-data-[collapsible=icon]:hidden">
               Account
             </span>
           )}

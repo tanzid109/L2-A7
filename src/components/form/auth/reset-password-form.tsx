@@ -3,19 +3,12 @@
 import { useForm } from "@tanstack/react-form";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { Eye, EyeClosed } from "lucide-react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useReset } from "@/hooks";
 import { resetPasswordSchema } from "@/validation";
 import { Button } from "../../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../../ui/card";
 import {
   Field,
   FieldDescription,
@@ -111,120 +104,118 @@ export default function ResetPasswordForm() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Reset Password</CardTitle>
-        <CardDescription>
-          Enter the OTP we sent to your email and your new password
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form
-          id="reset-form"
-          className="space-y-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            form.handleSubmit();
-          }}
-        >
-          <form.Field name="email">
-            {(field) => (
-              <Field>
-                <FieldLabel htmlFor={field.name}>Email</FieldLabel>
-                <Input
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h1 className="text-2xl font-bold tracking-tight">Reset Password</h1>
+        <p className="text-balance text-sm text-muted-foreground">
+          Enter the one-time code sent to your email and choose a new password
+        </p>
+      </div>
+
+      <form
+        id="reset-form"
+        className="flex flex-col gap-5"
+        onSubmit={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          form.handleSubmit();
+        }}
+      >
+        <form.Field name="email">
+          {(field) => (
+            <Field>
+              <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+              <Input
+                id={field.name}
+                name={field.name}
+                type="email"
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                readOnly
+              />
+            </Field>
+          )}
+        </form.Field>
+
+        <form.Field name="otp">
+          {(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>OTP</FieldLabel>
+                <InputOTP
                   id={field.name}
                   name={field.name}
-                  type="email"
+                  maxLength={6}
                   value={field.state.value}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  readOnly
-                />
+                  onChange={field.handleChange}
+                  onBlur={field.handleBlur}
+                  autoComplete="off"
+                  pattern={REGEXP_ONLY_DIGITS}
+                  aria-invalid={isInvalid}
+                >
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                <FieldDescription>
+                  Resend available in {resendTimer}s
+                </FieldDescription>
               </Field>
-            )}
-          </form.Field>
+            );
+          }}
+        </form.Field>
 
-          <form.Field name="otp">
-            {(field) => {
-              const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+        <form.Field name="newPassword">
+          {(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
 
-              return (
-                <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>OTP</FieldLabel>
-                  <InputOTP
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>New Password</FieldLabel>
+                <div className="relative">
+                  <Input
                     id={field.name}
                     name={field.name}
-                    maxLength={6}
+                    type={showPassword ? "text" : "password"}
                     value={field.state.value}
-                    onChange={field.handleChange}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
-                    autoComplete="off"
-                    pattern={REGEXP_ONLY_DIGITS}
+                    autoComplete="new-password"
                     aria-invalid={isInvalid}
+                    className="pr-10"
+                  />
+                  <button
+                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                    </InputOTPGroup>
-                  </InputOTP>
-                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                  <FieldDescription>
-                    Resend available in {resendTimer}s
-                  </FieldDescription>
-                </Field>
-              );
-            }}
-          </form.Field>
+                    {showPassword ? (
+                      <EyeClosed className="size-4" />
+                    ) : (
+                      <Eye className="size-4" />
+                    )}
+                  </button>
+                </div>
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
 
-          <form.Field name="newPassword">
-            {(field) => {
-              const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
-
-              return (
-                <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>New Password</FieldLabel>
-                  <div className="relative">
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type={showPassword ? "text" : "password"}
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      onBlur={field.handleBlur}
-                      autoComplete="new-password"
-                      aria-invalid={isInvalid}
-                      className="pr-10"
-                    />
-                    <button
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
-                      type="button"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      aria-label={
-                        showPassword ? "Hide password" : "Show password"
-                      }
-                    >
-                      {showPassword ? (
-                        <EyeClosed className="size-4" />
-                      ) : (
-                        <Eye className="size-4" />
-                      )}
-                    </button>
-                  </div>
-                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                </Field>
-              );
-            }}
-          </form.Field>
-        </form>
-      </CardContent>
-      <CardFooter>
-        <Button disabled={resetPending} type="submit" form="reset-form">
+        <Button disabled={resetPending} type="submit">
           {resetPending ? (
             <>
               <Spinner /> Submitting
@@ -233,7 +224,17 @@ export default function ResetPasswordForm() {
             "Reset Password"
           )}
         </Button>
-      </CardFooter>
-    </Card>
+      </form>
+
+      <div className="text-center text-sm text-muted-foreground">
+        Remembered your password?{" "}
+        <Link
+          href="/login"
+          className="font-medium underline underline-offset-4 hover:text-primary"
+        >
+          Back to login
+        </Link>
+      </div>
+    </div>
   );
 }

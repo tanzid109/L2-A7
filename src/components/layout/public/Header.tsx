@@ -1,11 +1,11 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { cn } from "cn";
-import { LayoutDashboard, LogOut, Menu, Wrench } from "lucide-react";
+import { LayoutDashboard, LogOut, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Brand } from "@/components/shared/brand";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,14 +18,15 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "@/components/ui/toast";
 import { useGetMe, useLogout } from "@/hooks";
+import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types";
 
 const navLinks = [
   { name: "Services", url: "/services" },
-  { name: "How It Works", url: "/#how-it-works" },
   { name: "Technicians", url: "/technicians" },
   { name: "About", url: "/about-us" },
   { name: "Contact", url: "/contact" },
+  { name: "How It Works", url: "/#how-it-works" },
 ];
 
 const dashboardRoute: Record<UserRole, string> = {
@@ -33,19 +34,6 @@ const dashboardRoute: Record<UserRole, string> = {
   TECHNICIAN: "/technician",
   CUSTOMER: "/customer",
 };
-
-function Brand() {
-  return (
-    <Link href="/" className="flex items-center gap-2">
-      <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-        <Wrench className="size-4" />
-      </span>
-      <span className="font-heading text-lg font-bold tracking-tight">
-        FieldOps
-      </span>
-    </Link>
-  );
-}
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -57,6 +45,11 @@ export default function Header() {
 
   const role = data?.data?.role;
   const bookUrl = role === "CUSTOMER" ? "/customer/book" : "/services";
+
+  const navItems =
+    role === "CUSTOMER"
+      ? [...navLinks, { name: "Apply as Technician", url: "/apply" }]
+      : navLinks;
 
   const handleLogout = () => {
     setMenuOpen(false);
@@ -119,7 +112,7 @@ export default function Header() {
         <Button
           variant="ghost"
           onClick={handleLogout}
-          className="w-full text-muted-foreground sm:w-auto"
+          className="w-full text-red-500 sm:w-auto"
         >
           <LogOut />
           Logout
@@ -128,12 +121,12 @@ export default function Header() {
     ) : null;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/70">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Brand />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
-          {navLinks.map((link) => (
+          {navItems.map((link) => (
             <Link
               key={link.url}
               href={link.url}
@@ -169,7 +162,7 @@ export default function Header() {
             </SheetHeader>
 
             <nav className="flex flex-col gap-1 px-4 py-2" aria-label="Mobile">
-              {navLinks.map((link) => (
+              {navItems.map((link) => (
                 <SheetClose
                   key={link.url}
                   render={

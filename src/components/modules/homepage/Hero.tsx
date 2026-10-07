@@ -17,7 +17,7 @@ const assurances = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden border-b bg-linear-to-b from-primary/5 via-background to-background">
+    <section className="relative overflow-hidden border-b bg-linear-to-b from-primary to-background">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(hsl(220_25%_90%)_1px,transparent_1px)] bg-size-[22px_22px] mask-[linear-gradient(to_bottom,black,transparent_75%)]"
