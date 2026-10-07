@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import TablePagination from "@/components/ui/table-pagination";
 import { useGetAllApplications } from "@/hooks";
 import type { ApplicationParams, ApplicationStatus } from "@/types";
 import ApplicationApprovalTableLoading from "./application-approval-table-loading";
@@ -19,6 +20,7 @@ import ApplicationApprovalTableLoading from "./application-approval-table-loadin
 interface Props extends ApplicationParams {
   search?: string;
   handleReview: Dispatch<SetStateAction<string>>;
+  handlePageChange: Dispatch<SetStateAction<number>>;
 }
 
 const statusVariant: Record<
@@ -41,10 +43,13 @@ function getErrorMessage(error: unknown) {
 export default function ApplicationApprovalTable({
   search = "",
   handleReview,
+  handlePageChange,
   ...params
 }: Props) {
   const { data, isPending, isError, error, refetch, isFetching } =
     useGetAllApplications(params);
+
+  const totalPages = data?.meta?.totalPages ?? 0;
 
   if (isPending) {
     return <ApplicationApprovalTableLoading />;
@@ -140,6 +145,15 @@ export default function ApplicationApprovalTable({
           ))}
         </TableBody>
       </Table>
+      {totalPages > 1 && (
+        <div className="my-5">
+          <TablePagination
+            page={params.page ?? 1}
+            totalPages={totalPages}
+            handlePageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 }

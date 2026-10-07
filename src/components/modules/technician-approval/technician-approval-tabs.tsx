@@ -20,9 +20,15 @@ export default function TechnicianApprovalTabs() {
   const [tab, setTab] = useState<TabValue>("ALL");
   const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState("");
+  const [page, setPage] = useState(1);
+
+  const handleTabChange = (value: string) => {
+    setTab(value as TabValue);
+    setPage(1);
+  };
 
   const queryParams: ApplicationParams = {
-    page: 1,
+    page,
     limit: 10,
     ...(tab === "ALL" ? {} : { status: tab }),
   };
@@ -34,10 +40,13 @@ export default function TechnicianApprovalTabs() {
           type="search"
           placeholder="Search loaded applications by name or email"
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setPage(1);
+          }}
           className="w-full max-w-xs"
         />
-        <Tabs value={tab} onValueChange={(value) => setTab(value as TabValue)}>
+        <Tabs value={tab} onValueChange={handleTabChange}>
           <TabsList>
             {statusTabs.map(([value, label]) => (
               <TabsTrigger key={value} value={value}>
@@ -52,6 +61,7 @@ export default function TechnicianApprovalTabs() {
         {...queryParams}
         search={search}
         handleReview={setSelectedId}
+        handlePageChange={setPage}
       />
 
       <TechnicianReviewSheet

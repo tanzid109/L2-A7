@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import TablePagination from "@/components/ui/table-pagination";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/components/ui/toast";
 import {
@@ -327,31 +328,11 @@ export default function AvailabilityManager() {
           </div>
         )}
 
-        {meta && meta.totalPages > 1 && (
-          <div className="flex items-center justify-between gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              disabled={page <= 1}
-              onClick={() => setPage((current) => Math.max(1, current - 1))}
-            >
-              Previous
-            </Button>
-            <span className="text-sm text-muted-foreground">
-              Page {meta.page} of {meta.totalPages} · {meta.total} slots
-            </span>
-            <Button
-              type="button"
-              variant="outline"
-              disabled={page >= meta.totalPages}
-              onClick={() =>
-                setPage((current) => Math.min(meta.totalPages, current + 1))
-              }
-            >
-              Next
-            </Button>
-          </div>
-        )}
+        <TablePagination
+          page={page}
+          totalPages={meta?.totalPages ?? 1}
+          handlePageChange={setPage}
+        />
       </div>
 
       {editing && (

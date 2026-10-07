@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
+import TablePagination from "@/components/ui/table-pagination";
 import { toast } from "@/components/ui/toast";
 import {
   useCancelBooking,
@@ -303,31 +304,11 @@ export default function MyBookings() {
         );
       })}
 
-      {meta && meta.totalPages > 1 && (
-        <div className="flex items-center justify-between gap-3">
-          <Button
-            type="button"
-            variant="outline"
-            disabled={page <= 1}
-            onClick={() => setPage((current) => Math.max(1, current - 1))}
-          >
-            Previous
-          </Button>
-          <span className="text-sm text-muted-foreground">
-            Page {meta.page} of {meta.totalPages}
-          </span>
-          <Button
-            type="button"
-            variant="outline"
-            disabled={page >= meta.totalPages}
-            onClick={() =>
-              setPage((current) => Math.min(meta.totalPages, current + 1))
-            }
-          >
-            Next
-          </Button>
-        </div>
-      )}
+      <TablePagination
+        page={page}
+        totalPages={meta?.totalPages ?? 1}
+        handlePageChange={setPage}
+      />
     </div>
   );
 }
