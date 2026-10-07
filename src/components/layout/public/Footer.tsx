@@ -22,7 +22,7 @@ const linkGroups = [
   {
     title: "For Technicians",
     links: [
-      { name: "Become a Technician", url: "/apply" },
+      // { name: "Become a Technician", url: "/apply" },
       { name: "Technician Dashboard", url: "/technician" },
       { name: "Availability", url: "/technician/availability" },
     ],
