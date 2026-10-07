@@ -128,3 +128,28 @@
     @apply font-sans;
   }
 }
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float-y 6s ease-in-out 3s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delayed {
+    animation: none;
+  }
+}

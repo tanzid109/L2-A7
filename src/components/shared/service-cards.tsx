@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock } from "lucide-react";
+import { Clock, SearchX } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,20 +36,31 @@ export default function ServiceCards(params: ServiceParams) {
   const services = data.data.data;
 
   if (services.length === 0) {
-    return <p className="text-sm text-muted-foreground">No services found</p>;
+    return (
+      <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed p-10 text-center">
+        <SearchX className="size-8 text-muted-foreground/50" />
+        <p className="text-sm font-medium">No services found</p>
+        <p className="text-sm text-muted-foreground">
+          Try a different search or category.
+        </p>
+      </div>
+    );
   }
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((service) => (
-        <Card key={service.id} className="overflow-hidden pt-0">
-          <div className="relative aspect-video w-full bg-muted">
+        <Card
+          key={service.id}
+          className="group overflow-hidden pt-0 transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md"
+        >
+          <div className="relative aspect-video w-full overflow-hidden bg-muted">
             {service.imageUrl && (
               // biome-ignore lint/performance/noImgElement: simple card image
               <img
                 src={service.imageUrl}
                 alt={service.title}
-                className="size-full object-cover"
+                className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             )}
             <Badge variant="outline" className="absolute right-3 top-3">
