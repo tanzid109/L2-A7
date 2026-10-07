@@ -55,11 +55,6 @@ export default function ContactForm() {
       </div>
 
       <Button type="submit">Send Message</Button>
-
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        This form is a UI preview and does not send messages yet. For help with
-        an existing booking, contact directly from the booking page.
-      </p>
     </form>
   );
 }

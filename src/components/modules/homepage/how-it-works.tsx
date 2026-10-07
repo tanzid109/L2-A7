@@ -45,7 +45,7 @@ export default function HowItWorks() {
         <div className="relative mt-12">
           <div
             aria-hidden
-            className="absolute left-[12%] right-[12%] top-[46px] hidden h-px bg-border lg:block"
+            className="absolute left-[12%] right-[12%] top-11.5 hidden h-px bg-border lg:block"
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((step) => (

@@ -1,5 +1,5 @@
+import ContactForm from "@/components/modules/homepage/contact-form";
 import type { Metadata } from "next";
-import ContactForm from "./contact-form";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -16,7 +16,7 @@ const shortcuts = [
 
 export default function ContactPage() {
   return (
-    <section className="border-b bg-gradient-to-b from-primary/[0.05] to-background">
+    <section className="border-b bg-linear-to-b from-primary/5 to-background">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1fr_320px] lg:px-8">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">

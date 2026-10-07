@@ -17,10 +17,10 @@ const assurances = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden border-b bg-linear-to-b from-primary to-background">
+    <section className="relative overflow-hidden border-b bg-linear-to-b from-primary/15 via-transparent to-transparent">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(hsl(220_25%_90%)_1px,transparent_1px)] bg-size-[22px_22px] mask-[linear-gradient(to_bottom,black,transparent_75%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(79,70,229,0.14)_1px,transparent_1px)] bg-size-[22px_22px] mask-[linear-gradient(to_bottom,black,transparent_75%)]"
       />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
@@ -32,7 +32,9 @@ export default function Hero() {
 
           <h1 className="mt-5 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
             Professional Services,{" "}
-            <span className="text-primary">Right When You Need Them.</span>
+            <span className="text-brand-gradient">
+              Right When You Need Them.
+            </span>
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">

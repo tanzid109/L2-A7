@@ -22,11 +22,11 @@ import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types";
 
 const navLinks = [
+  { name: "Home", url: "/" },
   { name: "Services", url: "/services" },
   { name: "Technicians", url: "/technicians" },
   { name: "About", url: "/about-us" },
   { name: "Contact", url: "/contact" },
-  { name: "How It Works", url: "/#how-it-works" },
 ];
 
 const dashboardRoute: Record<UserRole, string> = {
