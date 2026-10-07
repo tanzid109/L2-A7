@@ -1,14 +1,16 @@
 "use client";
 
 import { useForm } from "@tanstack/react-form";
-import { Eye, EyeClosed } from "lucide-react";
+import type { VariantProps } from "class-variance-authority";
+import type { LucideIcon } from "lucide-react";
+import { Eye, EyeClosed, ShieldCheck, User, Wrench } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useLogin } from "@/hooks";
 import { loginSchema } from "@/validation";
 import GoogleLoginComponent from "../../modules/google-login/GoogleLogin";
-import { Button } from "../../ui/button";
+import { Button, type buttonVariants } from "../../ui/button";
 import {
   Field,
   FieldError,
@@ -20,8 +22,55 @@ import { Input } from "../../ui/input";
 import { Spinner } from "../../ui/spinner";
 import { toast } from "../../ui/toast";
 
+type DemoRole = "admin" | "customer" | "technician";
+
+interface DemoAccount {
+  role: DemoRole;
+  label: string;
+  email: string;
+  password: string;
+  href: string;
+  icon: LucideIcon;
+  variant: NonNullable<VariantProps<typeof buttonVariants>["variant"]>;
+}
+
+const allDemoAccounts: DemoAccount[] = [
+  {
+    role: "admin",
+    label: "Admin",
+    email: process.env.NEXT_PUBLIC_DEMO_ADMIN_EMAIL ?? "",
+    password: process.env.NEXT_PUBLIC_DEMO_ADMIN_PASSWORD ?? "",
+    href: "/admin",
+    icon: ShieldCheck,
+    variant: "default",
+  },
+  {
+    role: "customer",
+    label: "Customer",
+    email: process.env.NEXT_PUBLIC_DEMO_CUSTOMER_EMAIL ?? "",
+    password: process.env.NEXT_PUBLIC_DEMO_CUSTOMER_PASSWORD ?? "",
+    href: "/customer",
+    icon: User,
+    variant: "outline",
+  },
+  {
+    role: "technician",
+    label: "Technician",
+    email: process.env.NEXT_PUBLIC_DEMO_TECHNICIAN_EMAIL ?? "",
+    password: process.env.NEXT_PUBLIC_DEMO_TECHNICIAN_PASSWORD ?? "",
+    href: "/technician",
+    icon: Wrench,
+    variant: "secondary",
+  },
+];
+
+const demoAccounts = allDemoAccounts.filter((account) =>
+  Boolean(account.email && account.password),
+);
+
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [demoPending, setDemoPending] = useState<DemoRole | null>(null);
   const router = useRouter();
 
   const { mutate: login, isPending: loginPending } = useLogin();
@@ -62,6 +111,34 @@ export default function LoginForm() {
       });
     },
   });
+
+  const handleDemoLogin = (account: DemoAccount) => {
+    setDemoPending(account.role);
+    login(
+      { email: account.email, password: account.password },
+      {
+        onSuccess: () => {
+          toast.add({
+            title: "Demo login success",
+            description: `Welcome back, ${account.label}`,
+            type: "success",
+          });
+          router.push(account.href);
+        },
+        onError: (err) => {
+          setDemoPending(null);
+          toast.add({
+            title: "Demo login failed",
+            description:
+              (err as Error & { data?: { message?: string } }).data?.message ||
+              err.message ||
+              "Something went wrong. Please try again",
+            type: "error",
+          });
+        },
+      },
+    );
+  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -160,6 +237,37 @@ export default function LoginForm() {
           </Button>
         </FieldGroup>
       </form>
+
+      {demoAccounts.length > 0 && (
+        <>
+          <FieldSeparator>Demo login</FieldSeparator>
+          <div className="flex flex-col gap-3">
+            <p className="text-center text-xs text-muted-foreground">
+              Explore FieldOps instantly with a one-click demo account.
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {demoAccounts.map((account) => {
+                const Icon = account.icon;
+                const pending = demoPending === account.role;
+
+                return (
+                  <Button
+                    key={account.role}
+                    type="button"
+                    variant={account.variant}
+                    className="h-auto flex-col gap-1.5 py-3"
+                    disabled={demoPending !== null}
+                    onClick={() => handleDemoLogin(account)}
+                  >
+                    {pending ? <Spinner /> : <Icon />}
+                    {account.label}
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
 
       {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
         <>

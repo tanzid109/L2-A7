@@ -9,6 +9,7 @@ import {
   MapPin,
   Phone,
   Star,
+  TriangleAlert,
   User,
 } from "lucide-react";
 import Link from "next/link";
@@ -126,6 +127,22 @@ export default function TechnicianBookingDetail({
   );
 
   const handleStatus = (status: UpdatableBookingStatus) => {
+    const current = data?.data;
+
+    if (
+      (status === "IN_PROGRESS" || status === "COMPLETED") &&
+      current?.payment?.status !== "PAID"
+    ) {
+      toast.add({
+        title: "Payment required",
+        description:
+          "Work cannot start until the customer completes the payment.",
+        type: "error",
+      });
+      setConfirming(null);
+      return;
+    }
+
     updateStatus(
       { bookingId, payload: { status } },
       {
@@ -192,7 +209,12 @@ export default function TechnicianBookingDetail({
   }
 
   const booking = data.data;
-  const actions = STATUS_ACTIONS[booking.status] ?? [];
+  const isPaid = booking.payment?.status === "PAID";
+  const allActions = STATUS_ACTIONS[booking.status] ?? [];
+  const actions =
+    booking.status === "ACCEPTED" && !isPaid
+      ? allActions.filter((action) => action.status !== "IN_PROGRESS")
+      : allActions;
   const duration = booking.service.duration;
 
   return (
@@ -305,6 +327,13 @@ export default function TechnicianBookingDetail({
                 Payment has not been initiated by the customer yet.
               </p>
             )}
+            {booking.status === "ACCEPTED" && !isPaid && (
+              <div className="flex w-full items-start gap-2 rounded-lg border border-dashed bg-muted/40 p-3 text-sm text-muted-foreground">
+                <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-500" />
+                The customer has not completed payment yet. The job can only
+                start after payment is confirmed.
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -338,9 +367,11 @@ export default function TechnicianBookingDetail({
         <CardHeader>
           <CardTitle>Update status</CardTitle>
           <CardDescription>
-            {actions.length > 0
-              ? "Move this booking forward or reject it."
-              : "This booking is closed and can no longer be updated."}
+            {booking.status === "ACCEPTED" && !isPaid
+              ? "Waiting for the customer to complete payment before the job can start."
+              : actions.length > 0
+                ? "Move this booking forward or reject it."
+                : "This booking is closed and can no longer be updated."}
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap items-center gap-3">
