@@ -62,9 +62,6 @@ export default function ProfileUpdateForm({ user, onSaved }: Props) {
     avatar: null,
   };
   const { data } = useGetMe();
-
-  if (!data) return <ProfileLoading />;
-
   const form = useForm({
     defaultValues,
     validators: { onSubmit: profileUpdateSchema },
@@ -119,6 +116,8 @@ export default function ProfileUpdateForm({ user, onSaved }: Props) {
       });
     },
   });
+
+  if (!data) return <ProfileLoading />;
 
   return (
     <form

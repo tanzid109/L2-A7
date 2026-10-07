@@ -16,7 +16,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const CURRENCY = "USD";
+const CURRENCY = "BDT";
 
 const formatMoney = (value: number) =>
   new Intl.NumberFormat(undefined, {
