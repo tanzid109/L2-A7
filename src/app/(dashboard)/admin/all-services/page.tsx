@@ -1,13 +1,17 @@
-import ServiceTable from '@/components/modules/admin/service-table';
-import ServiceTableLoading from '@/components/modules/admin/service-table-loading';
-import React, { Suspense } from 'react';
+"use client";
+
+import { Suspense, useState } from "react";
+import ServiceTable from "@/components/modules/admin/service-table";
+import ServiceTableLoading from "@/components/modules/admin/service-table-loading";
 
 const AllServices = () => {
-    return (
-        <Suspense fallback={<ServiceTableLoading />}>
-            <ServiceTable />
-        </Suspense>
-    );
+  const [page, setPage] = useState(1);
+
+  return (
+    <Suspense fallback={<ServiceTableLoading />}>
+      <ServiceTable page={page} handlePageChange={setPage} />
+    </Suspense>
+  );
 };
 
 export default AllServices;

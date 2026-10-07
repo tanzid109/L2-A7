@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import {
   createService,
   deleteService,
@@ -6,7 +11,7 @@ import {
   getAllServices,
   updateService,
 } from "@/api";
-import { ServiceParams } from "@/types/service.type";
+import type { ServiceParams } from "@/types";
 
 export function useSuspenseGetAdminAnalytics() {
   return useSuspenseQuery({

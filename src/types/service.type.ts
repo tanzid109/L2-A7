@@ -1,6 +1,6 @@
-import { Service } from "./admin.type";
-import { ApiResponse } from "./api.type";
-import { PaginationMeta } from "./technician.type";
+import type { Service } from "./admin.type";
+import type { ApiResponse } from "./api.type";
+import type { PaginationMeta } from "./technician.type";
 
 export interface ServiceParams {
   search?: string;

@@ -1,10 +1,13 @@
 import apiClient from "@/lib/apiClient";
-import { ApiResponse } from "@/types";
-import {
+import type { ApiResponse } from "@/types";
+import type {
   CreateServiceResponse,
   GetAdminAnalyticsResponse,
 } from "@/types/admin.type";
-import { GetAllServicesResponse, ServiceParams } from "@/types/service.type";
+import type {
+  GetAllServicesResponse,
+  ServiceParams,
+} from "@/types/service.type";
 
 export function getAdminAnalytics() {
   return apiClient<GetAdminAnalyticsResponse>("/analytics/admin");
@@ -34,5 +37,3 @@ export function deleteService(id: string) {
     method: "DELETE",
   });
 }
-
-
