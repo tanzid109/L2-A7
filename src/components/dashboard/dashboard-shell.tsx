@@ -1,12 +1,8 @@
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import type { ReactNode } from "react";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import type { UserRole } from "@/types";
 import { DashboardSidebar } from "./dashboard-sidebar";
-import { ReactNode } from "react";
-import { UserRole } from "@/types";
+import { DashboardTopbar } from "./dashboard-topbar";
 
 export default function DashboardShell({
   children,
@@ -19,12 +15,8 @@ export default function DashboardShell({
     <SidebarProvider>
       <DashboardSidebar role={role} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-        </header>
-        <main className="p-4">
-          {children}
-        </main>
+        <DashboardTopbar role={role} />
+        <main className="p-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
