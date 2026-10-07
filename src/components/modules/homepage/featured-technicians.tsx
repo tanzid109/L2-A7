@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -135,16 +134,6 @@ export default function FeaturedTechnicians() {
                       </span>
                     </div>
                   </CardContent>
-
-                  <CardFooter>
-                    <Button
-                      className="w-full"
-                      nativeButton={false}
-                      render={<Link href="/customer/book" />}
-                    >
-                      Book Service
-                    </Button>
-                  </CardFooter>
                 </Card>
               ))}
             </div>

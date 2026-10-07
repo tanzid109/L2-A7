@@ -2,10 +2,17 @@
 
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight, Check, CircleCheckIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  CircleCheckIcon,
+  Clock,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import type { z } from "zod";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +28,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toast";
@@ -138,7 +146,7 @@ export default function BookingForm({ initialServiceId }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, setStepIndex] = useState(() => (initialServiceId ? 1 : 0));
   const [dateKey, setDateKey] = useState("");
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [booking, setBooking] = useState<BookingState>({
@@ -149,10 +157,11 @@ export default function BookingForm({ initialServiceId }: Props) {
 
   const { mutate: create, isPending: creating } = useCreateBooking();
 
-  const { data: servicesData } = useGetAllServices({
+  const servicesQuery = useGetAllServices({
     isActive: true,
     limit: 100,
   });
+  const servicesData = servicesQuery.data;
   const { data: techniciansData } = useGetTechnicians({ limit: 100 });
   const availabilityQuery = useGetTechnicianAvailability(booking.technicianId, {
     limit: 100,
@@ -307,10 +316,38 @@ export default function BookingForm({ initialServiceId }: Props) {
           />
         );
       case 1:
+        if (!selectedService) {
+          if (servicesQuery.isPending) {
+            return (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {[1, 2, 3].map((i) => (
+                  <Skeleton key={i} className="h-56 w-full" />
+                ))}
+              </div>
+            );
+          }
+
+          return (
+            <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed p-10 text-center">
+              <p className="text-sm text-muted-foreground">
+                Pick a service first so we can show you matching technicians.
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setStepIndex(0)}
+              >
+                Choose a service
+              </Button>
+            </div>
+          );
+        }
+
         return (
           <TechnicianSelector
             value={booking.technicianId}
             onSelect={handleTechnicianSelect}
+            category={selectedService.category}
           />
         );
       case 2: {
@@ -497,6 +534,49 @@ export default function BookingForm({ initialServiceId }: Props) {
     <div className="flex flex-col gap-6">
       <h1 className="text-2xl font-bold tracking-tight">Book a service</h1>
 
+      {selectedService && stepIndex >= 1 && (
+        <div className="flex flex-wrap items-center gap-4 rounded-xl border bg-muted/30 p-4 sm:p-5">
+          <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-lg bg-muted sm:w-36">
+            {selectedService.imageUrl && (
+              // biome-ignore lint/performance/noImgElement: simple service thumbnail
+              <img
+                src={selectedService.imageUrl}
+                alt={selectedService.title}
+                className="size-full object-cover"
+              />
+            )}
+          </div>
+
+          <div className="min-w-0 flex-1">
+            <Badge variant="outline">{selectedService.category}</Badge>
+            <p className="mt-1.5 truncate font-medium">
+              {selectedService.title}
+            </p>
+            <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
+              {selectedService.description}
+            </p>
+            <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+              <span className="font-bold text-foreground">
+                {Number(selectedService.price).toLocaleString()} BDT
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="size-4" />
+                {selectedService.duration} min
+              </span>
+            </p>
+          </div>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => jumpToStep(0)}
+          >
+            Change service
+          </Button>
+        </div>
+      )}
+
       <ol className="flex flex-wrap items-center gap-2 sm:gap-3">
         {STEPS.map((label, index) => {
           const isCompleted = index < stepIndex;
@@ -550,7 +630,9 @@ export default function BookingForm({ initialServiceId }: Props) {
             {stepIndex === 0 &&
               "Choose the service you need. Prices are per service."}
             {stepIndex === 1 &&
-              "Pick a technician. Availability and ratings come from their live profile."}
+              (selectedService
+                ? `Only ${selectedService.category} specialists are shown. Availability and ratings come from their live profile.`
+                : "Pick a technician. Availability and ratings come from their live profile.")}
             {stepIndex === 2 &&
               "Only free time slots reported by the technician are shown."}
             {stepIndex === 3 &&

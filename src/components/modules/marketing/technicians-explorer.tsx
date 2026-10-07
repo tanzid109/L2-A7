@@ -1,7 +1,6 @@
 "use client";
 
 import { RefreshCw, Search, Star } from "lucide-react";
-import Link from "next/link";
 import { type FormEvent, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -240,16 +238,6 @@ export default function TechniciansExplorer() {
                   </span>
                 </div>
               </CardContent>
-
-              <CardFooter>
-                <Button
-                  className="w-full"
-                  nativeButton={false}
-                  render={<Link href="/customer/book" />}
-                >
-                  Book Service
-                </Button>
-              </CardFooter>
             </Card>
           ))}
         </div>

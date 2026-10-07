@@ -28,8 +28,8 @@ export default function LoginForm() {
 
   const form = useForm({
     defaultValues: {
-      email: "admin@fieldops.com",
-      password: "Password123@",
+      email: "",
+      password: "",
     },
     validators: {
       onSubmit: loginSchema,
@@ -161,9 +161,12 @@ export default function LoginForm() {
         </FieldGroup>
       </form>
 
-      <FieldSeparator>Or continue with</FieldSeparator>
-
-      <GoogleLoginComponent />
+      {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
+        <>
+          <FieldSeparator>Or continue with</FieldSeparator>
+          <GoogleLoginComponent />
+        </>
+      )}
 
       <div className="text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}

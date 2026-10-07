@@ -31,9 +31,9 @@ export function RegisterForm() {
   const defaultValues: PatientDefaultValues = {
     name: "",
     email: "",
-    phone: "01912345678",
-    password: "@User123456",
-    confirmPassword: "@User123456",
+    phone: "",
+    password: "",
+    confirmPassword: "",
   };
 
   const { mutate: registration, isPending: registerPending } =
@@ -276,9 +276,12 @@ export function RegisterForm() {
         </FieldGroup>
       </form>
 
-      <FieldSeparator>Or continue with</FieldSeparator>
-
-      <GoogleLoginComponent />
+      {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
+        <>
+          <FieldSeparator>Or continue with</FieldSeparator>
+          <GoogleLoginComponent />
+        </>
+      )}
 
       <div className="text-center text-sm text-muted-foreground">
         Already have an account?{" "}

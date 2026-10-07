@@ -1,0 +1,104 @@
+{
+  "services": [
+    {
+      "title": "TV Mounting & DTH Service",
+      "slug": "tv-mounting-dth-service",
+      "description": "Wall mounting of LED and smart TVs on concrete or panel walls with sturdy brackets, cable hiding and DTH dish alignment. Includes signal check, channel tuning and a clean finish.",
+      "category": "Appliance Repair",
+      "price": 1600,
+      "duration": 60,
+      "imageUrl": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=80",
+      "image": "tv-mounting-dth-service.jpg"
+    },
+    {
+      "title": "Kitchen Deep Cleaning",
+      "slug": "kitchen-deep-cleaning",
+      "description": "Deep degreasing of kitchen counters, hob, chimney and cabinets. Includes sink polishing, tile grout scrubbing, waste bin sanitization and a ventilation wipe down using safe cleaning solutions.",
+      "category": "Cleaning",
+      "price": 2500,
+      "duration": 180,
+      "imageUrl": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80",
+      "image": "kitchen-deep-cleaning.jpg"
+    },
+    {
+      "title": "Bathroom & Toilet Deep Cleaning",
+      "slug": "bathroom-toilet-deep-cleaning",
+      "description": "Sanitization of bathroom tiles, shower area, commode and basin including hard water stain removal, faucet polishing, mirror shine and floor scrubbing with germ-protect cleaning agents.",
+      "category": "Cleaning",
+      "price": 1800,
+      "duration": 120,
+      "imageUrl": "https://images.unsplash.com/photo-1556911073-38127a1bd2e0?auto=format&fit=crop&w=900&q=80",
+      "image": "bathroom-toilet-deep-cleaning.jpg"
+    },
+    {
+      "title": "Carpet & Sofa Cleaning",
+      "slug": "carpet-sofa-cleaning",
+      "description": "Vacuum extraction and shampoo cleaning of carpets, sofas and cushions with stain treatment, odor removal and spot check. Environment friendly foam used, pieces are left fresh and dry in quick time.",
+      "category": "Cleaning",
+      "price": 3000,
+      "duration": 180,
+      "imageUrl": "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=900&q=80",
+      "image": "carpet-sofa-cleaning.jpg"
+    },
+    {
+      "title": "Full Apartment Deep Cleaning",
+      "slug": "full-apartment-deep-cleaning",
+      "description": "Whole-home deep cleaning including all rooms, floors, windows, kitchen and washrooms. Dusting, vacuuming, mopping and surface sanitization with a final quality check before handover.",
+      "category": "Cleaning",
+      "price": 6000,
+      "duration": 300,
+      "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80",
+      "image": "full-apartment-deep-cleaning.jpg"
+    },
+    {
+      "title": "Full Home Painting (Interior)",
+      "slug": "full-home-painting-interior",
+      "description": "Complete interior painting with wall putty, primer and premium durable paint. Includes surface preparation, old paint removal, crack filling, masking and two-coat application with a clean finish.",
+      "category": "Painting & Renovation",
+      "price": 18000,
+      "duration": 1440,
+      "imageUrl": "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=80",
+      "image": "full-home-painting-interior.jpg"
+    },
+    {
+      "title": "Wall Crack Filling & Waterproofing",
+      "slug": "wall-crack-filling-waterproofing",
+      "description": "Repair of wall cracks, damp patches and peeling paint with sealant, putty and waterproofing coats. Helps prevent seepage and improves the durability of interior and exterior walls.",
+      "category": "Painting & Renovation",
+      "price": 4500,
+      "duration": 300,
+      "imageUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=80",
+      "image": "wall-crack-filling-waterproofing.jpg"
+    },
+    {
+      "title": "Furniture Assembly & Repair",
+      "slug": "furniture-assembly-repair",
+      "description": "Assembly of wardrobes, bed frames, study tables and cabinets along with repair of loose joints, broken drawers and door hinges. Includes alignment, fixture tightening and stability test.",
+      "category": "Carpentry",
+      "price": 1600,
+      "duration": 120,
+      "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=900&q=80",
+      "image": "furniture-assembly-repair.jpg"
+    },
+    {
+      "title": "Garden & Terrace Makeover",
+      "slug": "garden-terrace-makeover",
+      "description": "Design and setup of rooftop or balcony gardens including planter placement, soil work, sapling and seasonal flower planting and drip watering arrangement for a calm green space.",
+      "category": "Gardening",
+      "price": 7500,
+      "duration": 360,
+      "imageUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80",
+      "image": "garden-terrace-makeover.jpg"
+    },
+    {
+      "title": "House Shifting & Moving Service",
+      "slug": "house-shifting-moving-service",
+      "description": "End-to-end home shifting with careful packing, loading, transportation and unpacking. Covers furniture, electronics and fragile items with secure wrapping and same-day placement in the new address.",
+      "category": "Moving & Shifting",
+      "price": 10000,
+      "duration": 480,
+      "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+      "image": "house-shifting-moving-service.jpg"
+    }
+  ]
+}

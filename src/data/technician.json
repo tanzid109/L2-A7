@@ -1,0 +1,224 @@
+{
+  "technicians": [
+    {
+      "name": "Rafiqul Islam",
+      "email": "rafiqul.islam@example.com",
+      "phone": "01710-111201",
+      "specialization": "HVAC & Air Conditioning",
+      "experience": "8+ years in AC repair, gas refill and installation",
+      "hourlyRate": 900,
+      "bio": "Certified HVAC technician with 8+ years of hands-on experience repairing and installing split AC units, conducting gas refills and diagnosing cooling faults. Known for punctual visits, honest advice and a tidy workspace after every job.",
+      "resume": "rafiqul-islam-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Tanvir Ahmed",
+      "email": "tanvir.ahmed@example.com",
+      "phone": "01710-111202",
+      "specialization": "HVAC & Air Conditioning",
+      "experience": "5+ years in AC deep cleaning and maintenance",
+      "hourlyRate": 750,
+      "bio": "Focused on AC deep cleaning, preventive servicing and filter maintenance for homes and offices. I follow a strict checklist to keep indoor air clean and reduce energy waste. Quick response and guaranteed satisfaction.",
+      "resume": "tanvir-ahmed-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Sabbir Hossain",
+      "email": "sabbir.hossain@example.com",
+      "phone": "01710-111203",
+      "specialization": "Plumbing",
+      "experience": "10+ years in pipe fitting, leakage repair and installation",
+      "hourlyRate": 850,
+      "bio": "Seasoned plumber experienced in water pipe installation, leakage detection and repair, bathroom fittings and drain unblocking. I use pressure tests to confirm every connection and leave the site clean and dry.",
+      "resume": "sabbir-hossain-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Mamunur Rashid",
+      "email": "mamunur.rashid@example.com",
+      "phone": "01710-111204",
+      "specialization": "Plumbing",
+      "experience": "6+ years in sink, basin and toilet services",
+      "hourlyRate": 700,
+      "bio": "Reliable technician specializing in sink washing, washbasin and toilet unblocking, commode installation and faucet replacement. I carry professional tools and eco-safe cleaning solutions to every visit.",
+      "resume": "mamunur-rashid-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Jahid Hasan",
+      "email": "jahid.hasan@example.com",
+      "phone": "01710-111205",
+      "specialization": "Electrical",
+      "experience": "9+ years in home wiring and electrical installation",
+      "hourlyRate": 950,
+      "bio": "Licensed electrician with deep knowledge of residential wiring, circuit breaker setup, switch-socket points and safety earthing. Every job is followed by a complete load test and safety documentation.",
+      "resume": "jahid-hasan-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Arifur Rahman",
+      "email": "arifur.rahman@example.com",
+      "phone": "01710-111206",
+      "specialization": "Electrical",
+      "experience": "4+ years in fan, light and switch installation",
+      "hourlyRate": 650,
+      "bio": "Skilled in installing ceiling fans, LED lights, switch boards and hanging lamps with neat and concealed wiring. I balance fan blades carefully and test every switch and connection before leaving.",
+      "resume": "arifur-rahman-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Shakil Mahmud",
+      "email": "shakil.mahmud@example.com",
+      "phone": "01710-111207",
+      "specialization": "Appliance Repair",
+      "experience": "7+ years in washing machine repair and servicing",
+      "hourlyRate": 800,
+      "bio": "Expert in diagnosing automatic and semi-automatic washing machine faults covering motors, pumps, inlet valves and drainage. I replace only quality parts, explain the issue clearly and run a full test cycle.",
+      "resume": "shakil-mahmud-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Kamrul Islam",
+      "email": "kamrul.islam@example.com",
+      "phone": "01710-111208",
+      "specialization": "Appliance Repair",
+      "experience": "6+ years in refrigerator repair and gas charging",
+      "hourlyRate": 820,
+      "bio": "Technician focused on fridge cooling issues, thermostat problems, compressor checks and gas charging. I always detect and seal leaks before refilling and verify temperature levels at the end of the service.",
+      "resume": "kamrul-islam-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Rakibul Karim",
+      "email": "rakibul.karim@example.com",
+      "phone": "01710-111209",
+      "specialization": "Appliance Repair",
+      "experience": "5+ years in TV mounting and DTH installation",
+      "hourlyRate": 700,
+      "bio": "Careful with every wall type, I mount and fix LED and smart TVs with sturdy brackets, hide cables neatly and align DTH dishes for a strong signal. Channel tuning and a clean finish included.",
+      "resume": "rakibul-karim-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Nahid Parvez",
+      "email": "nahid.parvez@example.com",
+      "phone": "01710-111210",
+      "specialization": "Cleaning",
+      "experience": "6+ years in kitchen and home deep cleaning",
+      "hourlyRate": 600,
+      "bio": "Team leader for deep cleaning jobs covering kitchens, bathrooms and full apartments. We use safe, chemical-free solutions, follow a room-by-room checklist and always do a final quality walkthrough.",
+      "resume": "nahid-parvez-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Fahim Shahriar",
+      "email": "fahim.shahriar@example.com",
+      "phone": "01710-111211",
+      "specialization": "Cleaning",
+      "experience": "4+ years in carpet and sofa cleaning",
+      "hourlyRate": 650,
+      "bio": "Specialist in carpet, sofa and mattress cleaning using extraction and shampoo methods with stain and odor treatment. I protect your furniture, use gentle foam and hand over dry, fresh pieces.",
+      "resume": "fahim-shahriar-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Mithun Sarker",
+      "email": "mithun.sarker@example.com",
+      "phone": "01710-111212",
+      "specialization": "Painting & Renovation",
+      "experience": "11+ years in interior painting and waterproofing",
+      "hourlyRate": 1000,
+      "bio": "Experienced painting contractor handling wall putty, primer, premium paint and waterproofing. I lead a small crew, protect your floors and furniture, keep to the schedule and deliver a smooth finish.",
+      "resume": "mithun-sarker-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Al Amin",
+      "email": "al.amin@example.com",
+      "phone": "01710-111213",
+      "specialization": "Painting & Renovation",
+      "experience": "5+ years in crack filling and damp repair",
+      "hourlyRate": 780,
+      "bio": "Focused on wall crack filling, damp patch repair and seepage prevention with sealants and waterproofing coats. I diagnose the root cause first so the fix lasts, not just covers the problem.",
+      "resume": "al-amin-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Helal Uddin",
+      "email": "helal.uddin@example.com",
+      "phone": "01710-111214",
+      "specialization": "Carpentry",
+      "experience": "8+ years in furniture assembly and repair",
+      "hourlyRate": 750,
+      "bio": "Carpenter with strong experience in wardrobe and bed assembly, loose joint repair, broken drawer fixing and hinge alignment. I use precision tools, check stability and clean up sawdust after each job.",
+      "resume": "helal-uddin-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Sohan Mia",
+      "email": "sohan.mia@example.com",
+      "phone": "01710-111215",
+      "specialization": "Carpentry",
+      "experience": "6+ years in custom furniture and woodworking",
+      "hourlyRate": 820,
+      "bio": "Detail-oriented woodworker for custom shelves, tables and kitchen cabinetry. I take exact measurements, work with quality timber and finishing varnishes, and always verify that everything fits perfectly.",
+      "resume": "sohan-mia-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Rubel Chowdhury",
+      "email": "rubel.chowdhury@example.com",
+      "phone": "01710-111216",
+      "specialization": "Gardening",
+      "experience": "7+ years in landscaping and terrace gardens",
+      "hourlyRate": 720,
+      "bio": "Passionate gardener who designs rooftop and balcony green spaces with planters, soil work, seasonal flowers and drip watering. I choose low-maintenance plants that suit Dhaka climates and provide care guides.",
+      "resume": "rubel-chowdhury-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Rony Das",
+      "email": "rony.das@example.com",
+      "phone": "01710-111217",
+      "specialization": "Gardening",
+      "experience": "4+ years in lawn care and plant maintenance",
+      "hourlyRate": 600,
+      "bio": "I specialize in grass cutting, hedge trimming, pruning and regular plant care for home gardens. I bring my own equipment, dispose of clippings and keep your green space healthy year-round.",
+      "resume": "rony-das-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Masud Rana",
+      "email": "masud.rana@example.com",
+      "phone": "01710-111218",
+      "specialization": "Moving & Shifting",
+      "experience": "9+ years in home shifting and logistics",
+      "hourlyRate": 900,
+      "bio": "Experienced moving coordinator for household shifting with careful packing, loading and unpacking. I lead a trained crew, protect electronics and fragile items with secure wrapping and place furniture as requested.",
+      "resume": "masud-rana-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Imran Kabir",
+      "email": "imran.kabir@example.com",
+      "phone": "01710-111219",
+      "specialization": "Electrical",
+      "experience": "12+ years in industrial and home electrical safety",
+      "hourlyRate": 1100,
+      "bio": "Senior electrician for complex wiring, load balancing, inverter and generator connections. I prioritize safety, use proper wire gauges and provide a written completion report with tests for every installation.",
+      "resume": "imran-kabir-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Farhan Chowdhury",
+      "email": "farhan.chowdhury@example.com",
+      "phone": "01710-111220",
+      "specialization": "HVAC & Air Conditioning",
+      "experience": "3+ years in AC maintenance contracts",
+      "hourlyRate": 680,
+      "bio": "Young HVAC technician offering routine AC servicing contracts for homes and small offices. I handle filter cleaning, drain flushing, thermostat checks and small parts replacement with quick turnaround times.",
+      "resume": "farhan-chowdhury-resume.pdf",
+      "avatarUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80"
+    }
+  ]
+}

@@ -16,9 +16,33 @@ import { cn } from "@/lib/utils";
 interface Props {
   value: string;
   onSelect: (technicianId: string) => void;
+  category?: string;
 }
 
-export default function TechnicianSelector({ value, onSelect }: Props) {
+function matchesCategory(specialization: string, category?: string) {
+  if (!category) return true;
+
+  const tokens = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(" ")
+      .filter(
+        (token) =>
+          token.length > 1 && !["and", "of", "the", "amp"].includes(token),
+      );
+
+  const categoryTokens = tokens(category);
+  const specTokens = tokens(specialization);
+
+  return categoryTokens.some((token) => specTokens.includes(token));
+}
+
+export default function TechnicianSelector({
+  value,
+  onSelect,
+  category,
+}: Props) {
   const { data, isPending, isError } = useGetTechnicians({ limit: 100 });
 
   if (isPending) {
@@ -37,12 +61,16 @@ export default function TechnicianSelector({ value, onSelect }: Props) {
     );
   }
 
-  const technicians = data?.data.data ?? [];
+  const technicians = (data?.data.data ?? []).filter((technician) =>
+    matchesCategory(technician.specialization, category),
+  );
 
   if (technicians.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
-        No technicians are available right now. Please try again later.
+        {category
+          ? `No technicians available for ${category} right now. Please try another service.`
+          : "No technicians are available right now. Please try again later."}
       </p>
     );
   }
